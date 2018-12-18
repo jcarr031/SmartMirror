@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!--<link rel="stylesheet" href="css/normalize.css">-->
+  <!--STYLESHEET LIBRARY-->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!--STYLE SHEETS-->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/smartMirror.css">
+</head>
+
+<body>
+<!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+  href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
+
+<!--MAIN PAGE CONTENT-->
+<div id="main">
+  <div id="leftBar">
+    <div id="calendarPanel" class="container">
+      <button id="authorize_button" style="display: none;">Authorize</button>
+      <button id="signout_button" style="display: none;">Sign Out</button>
+      <div id="eventList"></div>
+    </div>
+  </div>
+  <div id="rightBar">
+    <div id="dateTimeDisplay" class="container"></div>
+    <div id="weatherPanel" class="container"></div>
+  </div>
+</div>
+<div id="navBar">
+  <ul>
+    <li id="users" class="navButton"><i class="fa fa-user" aria-hidden="true"></i></li>
+    <!--<li class="navButton"><i class="fa fa-sun-o" aria-hidden="true"></i></li>-->
+    <!--<li class="navButton"><i class="fa fa-user" aria-hidden="true"></i></li>-->
+  </ul>
+</div>
+<!--END MAIN PAGE CONTENT-->
+
+<!--Javascript Libraries -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+<script src="https://underscorejs.org/underscore-min.js"></script>
+
+<!--Custom Code-->
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script src="js/google_calendar.js"></script>
+<script src="js/open_weather_map.js"></script>
+
+<!--HANDLEBAR TEMPLATES-->
+<script id="time-display" type="text/x-handlebars-template">
+  <div class="date">
+    {{ date }}
+  </div>
+  <div class="time">
+    <h4>{{ hours }}:{{ minutes }}<span id="seconds">:{{ seconds }}</span> {{ amPM }}</h4>
+  </div>
+</script>
+<script id="calendarEvent" type="text/x-handlebars-template">
+  <div class="event">
+    <h3 class="eventTitle">{{ title }}</h3>
+    <h5 class="eventStart">Start: {{ startTime }}</h5>
+    <h5 class="eventEnd">End:{{ endTime }}</h5>
+  </div>
+</script>
+<script id="weather" type="text/x-handlebars-template">
+  <div class="weatherBlock">
+    <div>
+      <h3>{{ temp }} &deg;F <i class="fa fa-thermometer-full" aria-hidden="true"></i></h3>
+      <h5>{{ location }}, {{ country }} <i class="fa fa-location-arrow" aria-hidden="true"></i></h5>
+    </div>
+  </div>
+</script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+  window.ga = function () { ga.q.push(arguments); };
+  ga.q = [];
+  ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('send', 'pageview');
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.google.calendar.handleClientLoad();" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  function() {};
+</script>
+
+</body>
+</html>
