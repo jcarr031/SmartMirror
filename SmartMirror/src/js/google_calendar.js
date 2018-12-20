@@ -45,7 +45,6 @@ app.google.calendar.initClient = () => {
 app.google.calendar.updateSigninStatus = (isSignedIn) => {
   if (isSignedIn) {
     app.google.calendar.listUpcomingEvents();
-    $('#users').addClass('active');
   }
 };
 
@@ -66,7 +65,6 @@ app.google.calendar.appendEvents = (message) => {
 
 //list Any upcoming events
 app.google.calendar.listUpcomingEvents = () => {
-  $('#eventList').html('');
   gapi.client.calendar.events.list({
                                      'calendarId'   : 'primary',
                                      'timeMin'      : (new Date()).toISOString(),
@@ -80,17 +78,33 @@ app.google.calendar.listUpcomingEvents = () => {
       startTime : '',
       endTime   : ''
     };
-
+    $('#eventList').html('');
     if (events.length > 0) {
       for (let i = 0; i < events.length; i++) {
         let event = events[i];
         context.title = event.summary;
-        context.startTime = new Date(event.start.dateTime || event.start.date).toLocaleDateString();
-        context.endTime = new Date(event.end.dateTime || event.end.date).toLocaleDateString();
+        if(event.start.dateTime){
+          context.startTime = new Date(event.start.dateTime).toLocaleString();
+        }else{
+          context.startTime = new Date(event.start.date).toLocaleDateString();
+        }
+        if(event.end.dateTime){
+          context.endTime = new Date(event.end.dateTime).toLocaleString();
+        }else{
+          context.endTime = new Date(event.end.date).toLocaleDateString();
+        }
+        // context.startTime = new Date(event.start.dateTime || event.start.date).toLocaleString();
+        // context.endTime = new Date(event.end.dateTime || event.end.date).toLocaleDateString();
         app.google.calendar.appendEvents(app.getStrings('calendarEvent', context));
       }
     } else {
       app.google.calendar.appendEvents('No upcoming events found.');
     }
+  }).then(() => {
+    $('#users').addClass('active');
+    app.CALENDAR_ENABLED = true;
+  }).catch((e) => {
+    console.error(`Error Occured while fetching events : ${e}`);
+    app.CALENDAR_ENABLED = false;
   });
 };

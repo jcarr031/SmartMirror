@@ -1,0 +1,41 @@
+.popup {
+  width            : 160px;
+  background-color : #555555;
+  color            : #FFFFFF;
+  text-align       : center;
+  border-radius    : 6px;
+  padding          : 8px 0;
+  position         : absolute;
+  z-index          : 1;
+  bottom           : 60px;
+  left             : 10px;
+  display          : none;
+}
+
+.popup::after {
+  content          : "";
+  position         : absolute;
+  top              : 100%;
+  left             : 5%;
+  border           : 5px solid transparent;
+  border-top-color : #555555;
+}
+
+#users.navButton .popup {
+  /*User Popup*/
+}
+
+#weather.navButton .popup {
+  /*Weather Popup*/
+  left : 55px;
+}
+
+#settings.navButton .popup {
+  /*Weather Popup*/
+  left : 100px;
+}
+
+
+.units_button {
+  margin : 0;
+}

@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,12 +18,11 @@
   <!--STYLE SHEETS-->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/smartMirror.css">
+  <link rel="stylesheet" href="css/popup.css">
 </head>
-
 <body>
 <!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
   href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
-
 <!--MAIN PAGE CONTENT-->
 <div id="main">
   <div id="leftBar">
@@ -41,9 +39,9 @@
 </div>
 <div id="navBar">
   <ul>
-    <li id="users" class="navButton"><i class="fa fa-user" aria-hidden="true"></i></li>
-    <!--<li class="navButton"><i class="fa fa-sun-o" aria-hidden="true"></i></li>-->
-    <!--<li class="navButton"><i class="fa fa-user" aria-hidden="true"></i></li>-->
+    <li id="users" class="navButton"><i class="fa fa-user" aria-hidden="true"></i><span class="popup"></span></li>
+    <li id="weather" class="navButton"><i class="fa fa-sun-o" aria-hidden="true"></i><span class="popup"></span></li>
+    <li id="settings" class="navButton"><i class="fa fa-cog" aria-hidden="true"></i><span class="popup"></span></li>
   </ul>
 </div>
 <!--END MAIN PAGE CONTENT-->
@@ -77,12 +75,20 @@
     <h5 class="eventEnd">End:{{ endTime }}</h5>
   </div>
 </script>
-<script id="weather" type="text/x-handlebars-template">
+<script id="weather-display" type="text/x-handlebars-template">
   <div class="weatherBlock">
     <div>
       <h3>{{ temp }} &deg;F <i class="fa fa-thermometer-full" aria-hidden="true"></i></h3>
       <h5>{{ location }}, {{ country }} <i class="fa fa-location-arrow" aria-hidden="true"></i></h5>
     </div>
+  </div>
+</script>
+<script id="weather-popup" type="text/x-handlebars-template">
+  <div id="weather-units">
+    <ul>
+      <li class="left-button">&deg;F</li>
+      <li class="right-button">&deg;C</li>
+    </ul>
   </div>
 </script>
 
@@ -95,9 +101,7 @@
   ga('send', 'pageview');
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};app.google.calendar.handleClientLoad();" onreadystatechange="if (this.readyState === 'complete') this.onload()">
-  function() {};
-</script>
+<script async defer src="https://apis.google.com/js/api.js" onload="app.init();" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </body>
 </html>

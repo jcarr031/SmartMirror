@@ -30,8 +30,6 @@ app.openWeather.getCurrentWeather = (url) => {
            url     : url, // headers : {'Authorization' : app.openWeather.API_KEY},
            success : function (result) {
              //set your variable to the result
-             console.log(`Success : ${result}`);
-             console.log(result);
              app.openWeather.setTemp(result);
            },
            error   : function (result) {
@@ -48,5 +46,5 @@ app.openWeather.setTemp = (response) => {
     location : response.name,
     country : response.sys.country
   };
-  $('#weatherPanel').html(app.getStrings('weather', strings));
+  $('#weatherPanel').html(app.getStrings('weather-display', strings));
 };
