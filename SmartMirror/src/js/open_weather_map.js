@@ -14,13 +14,13 @@ app.openWeather.apiURLS = {
 
 app.openWeather.getCurrentWeather = (url) => {
   // Add weather location
-  url = url.replace('{{city}}', 'Pittsburgh,US');
-  url = url.replace('{{zip}}', '15222');
+  url = url.replace('{{city}}', app.settings.location.city);
+  url = url.replace('{{zip}}', app.settings.location.zipCode);
   // url += 'Pittsburgh, US';
   // url += '15222';
 
   //Set Temp to Fahrenheit cuz 'Murica
-  url += '&units=imperial';
+  url += `&units=${app.settings.tempUnits}`;
 
   // Append API Key
   url += `&appid=${app.openWeather.API_KEY}`;
@@ -42,9 +42,18 @@ app.openWeather.getCurrentWeather = (url) => {
 
 app.openWeather.setTemp = (response) => {
   let strings = {
-    temp     : response.main.temp,
-    location : response.name,
-    country : response.sys.country
-  };
+    temp       : response.main.temp,
+    location   : response.name,
+    country    : response.sys.country,
+    units      : app.settings.tempUnits === 'imperial' ? 'F' : 'C',
+    warmHidden : 'none',
+    coldHidden : 'none'
+  }, lastTemp = app.settings.lastTemp;
+  if (lastTemp && strings.temp > lastTemp) {
+    strings.warmHidden = 'unset';
+  } else if (lastTemp && strings.temp < lastTemp) {
+    strings.coldHidden = 'unset';
+  }
+  app.settings.lastTemp = strings.temp;
   $('#weatherPanel').html(app.getStrings('weather-display', strings));
 };

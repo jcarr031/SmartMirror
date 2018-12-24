@@ -15,6 +15,7 @@ app.init = () => {
   }, (new Date().getTime() / 1000) % 1 * 1000);
   app.setupEvents();
   app.populatePopups();
+  app.loadSettings();
   // Get Weather Info
   app.openWeather.getCurrentWeather(app.openWeather.apiURLS.currentWeather.byCityName);
   // Start Calendar Client
@@ -109,4 +110,27 @@ app.popup = {};
 app.popup.toggle = (e) => {
   $('.popup').not($(e.currentTarget).find('.popup')).hide();
   $(e.currentTarget).find('.popup').toggle();
+};
+
+/*Config default settings*/
+app.settings = {
+  tempUnits   : 'metric',
+  refreshRate : 10, //in minutes?
+  location    : {
+    zipCode : 15222,
+    city    : 'Pittsburgh,US'
+  },
+  lastTemp    : null
+};
+
+app.loadSettings = () => {
+  Object.assign(app.settings, JSON.parse(localStorage.getItem('mirrorSettings')) || app.settings);
+
+  app.REFRESH_RATE = app.settings.refreshRate * (1000 * 60);
+};
+
+app.saveSettings = () => {
+  localStorage.setItem('mirrorSettings', JSON.stringify(app.settings));
+
+  app.REFRESH_RATE = app.settings.refreshRate * (1000 * 60);
 };

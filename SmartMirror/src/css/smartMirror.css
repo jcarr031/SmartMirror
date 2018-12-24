@@ -117,3 +117,11 @@ i.fa {
 li.active {
   color : #00DD00;
 }
+
+i.fa.fa-arrow-up.warmer{
+  color : #BB4444;
+}
+
+i.fa.fa-arrow-down.colder{
+  color : #44BBBB;
+}

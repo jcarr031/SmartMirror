@@ -78,7 +78,7 @@
 <script id="weather-display" type="text/x-handlebars-template">
   <div class="weatherBlock">
     <div>
-      <h3>{{ temp }} &deg;F <i class="fa fa-thermometer-full" aria-hidden="true"></i></h3>
+      <h3>{{ temp }} &deg;{{ units }} <i class="fa fa-thermometer-full" aria-hidden="true"></i> <i class="fa fa-arrow-up warmer" aria-hidden="true" style="display: {{ warmHidden }}"></i><i class="fa fa-arrow-down colder" aria-hidden="true" style="display: {{ coldHidden }}"></i></h3>
       <h5>{{ location }}, {{ country }} <i class="fa fa-location-arrow" aria-hidden="true"></i></h5>
     </div>
   </div>
