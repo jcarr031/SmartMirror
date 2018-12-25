@@ -1,0 +1,20 @@
+div#event-reminder-list {
+    position   : absolute;
+    bottom     : 75px;
+    left       : -300px;
+    transition : left 1s ease-in-out;
+}
+
+div.event-reminder {
+    position   : relative;
+    left       : -300px;
+    padding    : 5px;
+    width      : 200px;
+    background : #444444;
+    margin     : 3px 0;
+    transition : left 1s ease-in-out;
+}
+
+div.event-reminder * {
+    margin : 0;
+}

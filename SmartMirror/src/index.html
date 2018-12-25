@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/smartMirror.css">
   <link rel="stylesheet" href="css/popup.css">
+  <link rel="stylesheet" href="css/eventReminder.css">
 </head>
 <body>
 <!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
@@ -44,6 +45,7 @@
     <li id="settings" class="navButton"><i class="fa fa-cog" aria-hidden="true"></i><span class="popup"></span></li>
   </ul>
 </div>
+<div id="event-reminder-list"></div>
 <!--END MAIN PAGE CONTENT-->
 
 <!--Javascript Libraries -->
@@ -58,6 +60,7 @@
 <script src="js/main.js"></script>
 <script src="js/google_calendar.js"></script>
 <script src="js/open_weather_map.js"></script>
+<script src="js/event_popup.js"></script>
 
 <!--HANDLEBAR TEMPLATES-->
 <script id="time-display" type="text/x-handlebars-template">
@@ -91,6 +94,12 @@
     </ul>
   </div>
 </script>
+<script id="event-reminder-popup" type="text/x-handlebars-template">
+  <div class="event-reminder">
+    <h4>{{ ReminderTitle }}</h4>
+    <h5>{{ Time_to_event }}</h5>
+  </div>
+</script>
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>
@@ -104,4 +113,4 @@
 <script async defer src="https://apis.google.com/js/api.js" onload="app.init();" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 
 </body>
-</html>
+< /html>;
